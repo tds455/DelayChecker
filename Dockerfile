@@ -9,6 +9,3 @@ EXPOSE 80
 
 # Define the default command to start Nginx when the container starts
 CMD ["nginx", "-g", "daemon off;"]
-
-# Specify Entrypoint
-ENTRYPOINT ["sh", "/docker-entrypoint.sh"]
