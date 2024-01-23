@@ -23,19 +23,6 @@ pipeline {
             }
         }
 
-        stage('Stop and Remove Existing Container') {
-            steps {
-                // Stop and remove the existing Docker container if it's running
-                script {
-                    try {
-                        docker.image(${DOCKER_IMAGE}).stop()
-                        docker.image(${DOCKER_IMAGE}).remove()
-                    } catch (Exception e) {
-                        echo "No existing container found."
-                    }
-                }
-            }
-        }
 
         stage('Run Docker Container') {
             steps {
