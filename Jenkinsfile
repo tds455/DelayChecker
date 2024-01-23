@@ -28,7 +28,10 @@ pipeline {
             steps {
                 // Run the Docker container
                 script {
+                    // Remove existing container 
                     sh 'docker container rm -f delay-checker-container'
+
+                    // Run new container 
                     docker.image("${DOCKER_IMAGE}").run("-p 80:80 --name delay-checker-container" )
                 }
             }
