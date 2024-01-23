@@ -28,7 +28,7 @@ pipeline {
             steps {
                 // Run the Docker container
                 script {
-                    docker.image("${DOCKER_IMAGE}").run("-p 80:80 --name delay-checker-container")
+                    docker.image("${DOCKER_IMAGE}").run("-p 80:80 --name delay-checker-container --reuseNode true" )
                 }
             }
         }
