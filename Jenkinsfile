@@ -23,6 +23,20 @@ pipeline {
             }
         }
 
+        stage('Stop and Remove Existing Container') {
+            steps {
+                // Stop and remove the existing Docker container if it's running
+                script {
+                    try {
+                        docker.image(delay-checker-container).stop()
+                        docker.image(delay-checker-container).remove()
+                    } catch (Exception e) {
+                        echo "No existing container found."
+                    }
+                }
+            }
+        }
+
         stage('Run Docker Container') {
             steps {
                 // Run the Docker container
