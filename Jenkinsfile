@@ -35,7 +35,7 @@ pipeline {
                     docker.image("${DOCKER_IMAGE}").run("-p 80:80 --name delay-checker-container" )
 
                     // Remove unused images
-                    sh 'docker image prune'
+                    sh 'docker image prune -f'
                 }
             }
         }
