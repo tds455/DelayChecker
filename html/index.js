@@ -2,7 +2,8 @@
 const apiUrl = 'https://api.example.com/data';
 
 // Make a GET request
-fetch(apiUrl)
+fetch(ahttps://aviation-edge.com/v2/public/flightsHistory?key=[API_KEY]&type=departure
+&date_from=YYYY-MM-DD&date_to=YYYY-MM-DD&flight_number=[1234])
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
