@@ -1,8 +1,10 @@
-// Define the API URL
-const apiUrl = 'https://api.example.com/data';
+
+// Process form input and create API url
+
+// const apiUrl = 'https://aviation-edge.com/v2/public/flightsHistory?key=$AEKEY&code=JFK&type=arrival&date_from=2023-12-01&flight_number=4764';
 
 // Make a GET request
-fetch(https://aviation-edge.com/v2/public/flightsHistory?key=$AEKEY&code=JFK&type=arrival&date_from=2023-12-01&flight_number=4764)
+fetch(apiUrl)
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
