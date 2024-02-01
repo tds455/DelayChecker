@@ -5,7 +5,7 @@ const apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/F
 
 // Make a GET request
 
-InputValidation()
+function InputValidation() {
   // Perform Input Validation
 
   // Error Checking
@@ -18,7 +18,11 @@ InputValidation()
 
   // Otherwise, CreateCards()
 
-MakeRequest()
+  CreateCards(response)
+
+}
+
+function MakeRequest()  {
   fetch(apiUrl)
     .then(response => {
       if (!response.ok) {
@@ -34,6 +38,9 @@ MakeRequest()
     .catch(error => {
       console.error('Error:', error);
     });
+  }
 
+function CreateCards(json) {
+    console.log(json)
 
-CreateCards()
+}
