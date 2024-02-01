@@ -53,16 +53,16 @@ function CreateCards(data) {
 
     data.forEach(item => {
       const row = document.createElement('div');
-      row.classList.add('row','card');
+      row.classList.add('row');
   
       const card = document.createElement('div');
-      card.classList.add('card-body');
+      card.classList.add('card-body','card');
 
       const body = document.createElement('p');
       body.textContent = item.airline.name;
       
       const card2 = document.createElement('div');
-      cardBody2.classList.add('card-body');
+      card2.classList.add('card-body','card');
 
       const body2 = document.createElement('p');
       body2.textContent = item.departure.delay;
