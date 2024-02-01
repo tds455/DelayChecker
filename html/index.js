@@ -59,14 +59,16 @@ function CreateCards(data) {
       card.classList.add('card-body','card');
 
       const body = document.createElement('p');
-      body.textContent = item.airline.name;
+      body.textContent = "Airline: "+item.airline.name;
+      body.textContent += "Flight number: "+item.flight.number
       
       const card2 = document.createElement('div');
       card2.classList.add('card-body','card');
 
       const body2 = document.createElement('p');
-      body2.textContent = item.departure.delay;
-     
+      body2.textContent = "Minutes Delay on Depature: "+item.departure.delay;
+      body2.textContent += "Time of Departure: "+item.departure.actualTime;
+
 
       row.appendChild(card);
       card.appendChild(body);
