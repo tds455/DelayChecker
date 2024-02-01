@@ -4,13 +4,13 @@
 let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?code=KIX&type=arrival&date_from=2024-01-15&date_to=2024-01-16&flight_number=711';
 // Make a GET request
 
-function InputValidation() {
+async function InputValidation() {
   // Perform Input Validation
 
   // Error Checking
 
   // Pass Parameters
-  let data = MakeRequest()
+  let data = await MakeRequest()
 
   // if response = error
   // Update footer to show error message
