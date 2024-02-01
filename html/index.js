@@ -49,11 +49,19 @@ async function MakeRequest()  {
   }
 
 function CreateCards(data) {
-    text=JSON.stringify(data)
-    console.log(text)
     const element = document.getElementById("ResponseCards");
-    const node = document.createTextNode("test")
-    element.appendChild(node)
+
+    data.forEach(item => {
+      console.log(item.body)
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      const body = document.createElement('p');
+      body.textContent = item.body;
+
+      card.appendChild(body);
+      element.appendChild(card);
+    })
     // For Item in Json
     // Create CARD [0.arrival.date]
     // Create CARD HTMLtext+[1.arrival.delay]
