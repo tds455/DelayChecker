@@ -24,7 +24,6 @@ async function InputValidation() {
 async function MakeRequest()  { 
   const response = await fetch(apiUrl)
 
-  // Handle CORS
   const data = await response.json()
   return data
 
@@ -60,7 +59,15 @@ function CreateCards(data) {
       departureDelay = item.departureDelay
       arrivalDelay = item.arrivalDelay
 
-      // Simplify below into 3 columns of equal width
+      // Create Row 
+
+      // Create Each card in it's own column
+
+      // Card 1 - Date, Airline, Flight number
+
+      // Card 2 - Time of departure, Departure delay
+
+      // Card 3 - Time of arrival, Arrival delay
       
 
 
