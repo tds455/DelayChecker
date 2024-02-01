@@ -49,7 +49,7 @@ async function MakeRequest()  {
   }
 
 function CreateCards(data) {
-    console.log(json)
+    console.log(data)
     text=JSON.stringify(data)
     console.log(text)
     const element = document.getElementById("ResponseCards");
