@@ -27,6 +27,7 @@ function MakeRequest()  {
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
+        console.log("Error")
         // Set footer to show error message
       }
       return response.json();
@@ -41,6 +42,6 @@ function MakeRequest()  {
   }
 
 function CreateCards(json) {
-    console.log(json.json())
+    console.log(json)
 
 }
