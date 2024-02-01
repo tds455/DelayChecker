@@ -11,34 +11,37 @@ function InputValidation() {
   // Error Checking
 
   // Pass Parameters
-  let response = MakeRequest()
+  let data = MakeRequest()
 
   // if response = error
   // Update footer to show error message
 
   // Otherwise, CreateCards()
 
-  CreateCards(response)
+  CreateCards(data)
 
 }
 
-function MakeRequest()  {
-  fetch(apiUrl)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-        console.log("Error")
-        // Set footer to show error message
-      }
-      return response.json();
-    })
-    .then(data => {
-      // For now log data to console while testing
-      console.log(data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+async function MakeRequest()  { 
+  const response = await fetch(apiUrl)
+  const data = await response.json()
+  return data
+  // fetch(apiUrl)  
+  //   .then(response => {
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok');
+  //       console.log("Error")
+  //       // Set footer to show error message
+  //     }
+  //     return response.json();
+  //   })
+  //   .then(data => {
+  //     // For now log data to console while testing
+  //     console.log(data);
+  //   })
+  //   .catch(error => {
+  //     console.error('Error:', error);
+  //   });
   }
 
 function CreateCards(json) {
