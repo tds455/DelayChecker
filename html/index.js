@@ -53,24 +53,25 @@ function CreateCards(data) {
 
     data.forEach(item => {
       const row = document.createElement('div');
-      row.classList.add('row');
-      
-      const container = document.createElement('div');
-      container.classList.add('col-sm-6 mb-3 mb-sm-0');
-
+      row.classList.add('row','card');
+  
       const card = document.createElement('div');
-      card.classList.add('card');
-
-      const cardBody = document.createElement('div');
-      cardBody.classList.add('card-body');
+      card.classList.add('card-body');
 
       const body = document.createElement('p');
       body.textContent = item.airline.name;
+      
+      const card2 = document.createElement('div');
+      cardBody2.classList.add('card-body');
 
-      row.appendChild(container);
-      container.appendChild(card);
-      card.appendChild(cardBody);
-      cardBody.appendChild(body);
+      const body2 = document.createElement('p');
+      body2.textContent = item.departure.delay;
+     
+
+      row.appendChild(card);
+      card.appendChild(body);
+      row.appendChild(card2);
+      card2.appendChild(body2);
       element.appendChild(row);
     })
     // For Item in Json
