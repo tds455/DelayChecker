@@ -41,6 +41,6 @@ function MakeRequest()  {
   }
 
 function CreateCards(json) {
-    console.log(json)
+    console.log(json.json())
 
 }
