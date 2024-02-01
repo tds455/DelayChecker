@@ -52,12 +52,30 @@ function CreateCards(data) {
     const element = document.getElementById("ResponseCards");
 
     data.forEach(item => {
+
+      // Info required for each entry
+      departureDate = item.departure.actualTime
+      airlineName = item.airline.name
+      flightNumber = item.flight.number
+      departureDelay = item.departureDelay
+      arrivalDelay = item.arrivalDelay
+
+      // Simplify below into 3 columns of equal width
+      
+
+
+      // Original Version 
+
+      // Create div for response data to be placed into
       const row = document.createElement('div');
+      // Place each response into a seperate row
       row.classList.add('row');
-  
+      
+      // Create cards
       const card = document.createElement('div');
       card.classList.add('card-body','card');
 
+      // Populate cards with data from response
       const body = document.createElement('p');
       body.textContent = "Airline: "+item.airline.name;
       body.textContent += "Flight number: "+item.flight.number
