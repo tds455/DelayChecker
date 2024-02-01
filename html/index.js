@@ -23,8 +23,13 @@ async function InputValidation() {
 
 async function MakeRequest()  { 
   const response = await fetch(apiUrl)
+
+  // Handle CORS
   const data = await response.json()
   return data
+
+
+
   // fetch(apiUrl)  
   //   .then(response => {
   //     if (!response.ok) {
@@ -45,5 +50,7 @@ async function MakeRequest()  {
 
 function CreateCards(json) {
     console.log(json)
-
+    // For Item in Json
+    // Create CARD [0.arrival.date]
+    // Create CARD HTMLtext+[1.arrival.delay]
 }
