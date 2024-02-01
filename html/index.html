@@ -18,7 +18,7 @@
             <div class="card-body">
               <h5 class="card-title">Please select arrival airport code and flight number</h5>
             </div>
-            <form class="justify-content-between">
+            <div class="justify-content-between">
                 <div class="input-group mb-2 pl-2 pr-2">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Arrival airport code</button>
                     <ul class="dropdown-menu">
@@ -31,9 +31,9 @@
                     <input type="text" class="form-control" placeholder="Flight #" aria-label="Text input with dropdown button">
                   </div>
                   <div class="col-12">
-                    <button onclick="InputValidation()" class="btn btn-primary mb-2">Submit</button>
+                    <button onclick="InputValidation()" onsubmit="return false" type="submit" class="btn btn-primary mb-2">Submit</button>
                   </div>
-            </form>
+                </div>
             <div id="CardFooter" class="card-footer text-body-secondary">
               <!-- Display response error / confirmation here -->
             </div>
