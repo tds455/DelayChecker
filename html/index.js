@@ -50,7 +50,7 @@ async function MakeRequest()  {
 
 function CreateCards(data) {
     text=JSON.stringify(data)
-    console.log($text[0])
+    console.log(text)
     const element = document.getElementById("ResponseCards");
     const node = document.createTextNode("test")
     element.appendChild(node)
