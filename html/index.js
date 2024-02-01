@@ -48,8 +48,13 @@ async function MakeRequest()  {
   //   });
   }
 
-function CreateCards(json) {
+function CreateCards(data) {
     console.log(json)
+    text=JSON.stringify(data)
+    console.log(text)
+    const element = document.getElementById("ResponseCards");
+    const node = document.createTextNode("test")
+    element.appendChild(node)
     // For Item in Json
     // Create CARD [0.arrival.date]
     // Create CARD HTMLtext+[1.arrival.delay]
