@@ -60,9 +60,19 @@ function CreateCards(data) {
       arrivalDelay = item.arrivalDelay
 
       // Create Row 
-
+      const row = document.createElement('div');
+      row.classList.add('row')
       // Create Each card in it's own column
+      for (let i = 0; i < 2; i++) {
+        let column = document.createElement('div')
+        column.classList.add('col-sm')
+        let card = document.createElement('div')
+        card.classList.add('card')
+        column.appendChild(card)
+        row.appendChild(column)
+      }
 
+      
       // Card 1 - Date, Airline, Flight number
 
       // Card 2 - Time of departure, Departure delay
@@ -73,33 +83,33 @@ function CreateCards(data) {
 
       // Original Version 
 
-      // Create div for response data to be placed into
-      const row = document.createElement('div');
-      // Place each response into a seperate row
-      row.classList.add('row');
+      // // Create div for response data to be placed into
+      // const row = document.createElement('div');
+      // // Place each response into a seperate row
+      // row.classList.add('row');
       
-      // Create cards
-      const card = document.createElement('div');
-      card.classList.add('card-body','card');
+      // // Create cards
+      // const card = document.createElement('div');
+      // card.classList.add('card-body','card');
 
-      // Populate cards with data from response
-      const body = document.createElement('p');
-      body.textContent = "Airline: "+item.airline.name;
-      body.textContent += "Flight number: "+item.flight.number
+      // // Populate cards with data from response
+      // const body = document.createElement('p');
+      // body.textContent = "Airline: "+item.airline.name;
+      // body.textContent += "Flight number: "+item.flight.number
       
-      const card2 = document.createElement('div');
-      card2.classList.add('card-body','card');
+      // const card2 = document.createElement('div');
+      // card2.classList.add('card-body','card');
 
-      const body2 = document.createElement('p');
-      body2.textContent = "Minutes Delay on Depature: "+item.departure.delay;
-      body2.textContent += "Time of Departure: "+item.departure.actualTime;
+      // const body2 = document.createElement('p');
+      // body2.textContent = "Minutes Delay on Depature: "+item.departure.delay;
+      // body2.textContent += "Time of Departure: "+item.departure.actualTime;
 
 
-      row.appendChild(card);
-      card.appendChild(body);
-      row.appendChild(card2);
-      card2.appendChild(body2);
-      element.appendChild(row);
+      // row.appendChild(card);
+      // card.appendChild(body);
+      // row.appendChild(card2);
+      // card2.appendChild(body2);
+      // element.appendChild(row);
     })
     // For Item in Json
     // Create CARD [0.arrival.date]
