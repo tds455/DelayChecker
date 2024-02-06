@@ -48,6 +48,7 @@ async function MakeRequest()  {
   }
 
 function CreateCards(data) {
+  
     const element = document.getElementById("ResponseCards");
 
     data.forEach(item => {
@@ -61,30 +62,29 @@ function CreateCards(data) {
 
       // Create Row 
       const row = document.createElement('div');
-      row.classList.add('row')
+      row.classList.add('row');
       // Create Each card in it's own column
-
-      // Card 1 - Date, Airline, Flight number
-      const Card1 = document.createElement('div')
-      Card1.classList.add('card')
-      Card1.textcontent = "Departure Date: "+departureDate+"Airline Name: "+airlineName+"Flight Number: "+flightNumber;
       
+      Card1 = NewCard()
+      // Card 1 - Date, Airline, Flight number
+      // const Card1 = document.createElement('div');
+      // Card1.classList.add('card', 'card-body');
+      // Card1.textcontent = "Departure Date: "+departureDate+"Airline Name: "+airlineName+"Flight Number: "+flightNumber;
+      // row.appendChild(Card1);
 
       // Card 2 - Time of departure, Departure delay
-      const Card2 = document.createElement('div') 
+      const Card2 = document.createElement('div');
+      Card2.classList.add('card-body','card');
+      Card2.textconent = departureDelay;
+      row.appendChild(Card2);
+
       // Card 3 - Time of arrival, Arrival delay
-      const Card3 = document.createElement('div')
-      
-      row.appendChild(Card1, Card2, Card3)
+      const Card3 = document.createElement('div');
+      Card3.classList.add('card-body','card');
+      Card3.textContent = arrivalDelay;
+      row.appendChild(Card3);
 
-      element.appendChild(row)  
-
-    
-
-      
-
-
-
+      element.appendChild(row);
       // Original Version 
 
       // // Create div for response data to be placed into
@@ -118,4 +118,15 @@ function CreateCards(data) {
     // For Item in Json
     // Create CARD [0.arrival.date]
     // Create CARD HTMLtext+[1.arrival.delay]
+
+    function NewCard() {
+      const Card = document.createElement('div');
+      Card.classList.add('card');
+      const CardBody = document.createElement('div');
+      CardBody.classList.add('card-body');
+      CardBody.textconent = "";
+      Card.appendChild(CardBody)
+      return Card
+
+    }
 }
