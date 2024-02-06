@@ -28,7 +28,6 @@ async function MakeRequest()  {
   return data
 
 
-
   // fetch(apiUrl)  
   //   .then(response => {
   //     if (!response.ok) {
@@ -57,8 +56,9 @@ function CreateCards(data) {
       departureDate = item.departure.actualTime
       airlineName = item.airline.name
       flightNumber = item.flight.number
-      departureDelay = item.departureDelay
-      arrivalDelay = item.arrivalDelay
+      departureDelay = item.departure.delay
+      arrivalDate = item.arrival.actualTime
+      arrivalDelay = item.arrival.delay
 
       // Create Row 
       const row = document.createElement('div');
@@ -66,67 +66,30 @@ function CreateCards(data) {
       // Create Each card in it's own column
       
       Card1 = NewCard()
-      // Card 1 - Date, Airline, Flight number
-      // const Card1 = document.createElement('div');
-      // Card1.classList.add('card', 'card-body');
-      // Card1.textcontent = "Departure Date: "+departureDate+"Airline Name: "+airlineName+"Flight Number: "+flightNumber;
-      // row.appendChild(Card1);
+      Card1.children[0].innerHTML = "Airline Name: "+airlineName+"<br />"+"Flight Number: "+flightNumber;
+      row.appendChild(Card1);
+      
 
-      // Card 2 - Time of departure, Departure delay
-      const Card2 = document.createElement('div');
-      Card2.classList.add('card-body','card');
-      Card2.textconent = departureDelay;
+      Card2 = NewCard()
+      Card2.children[0].innerHTML = "Departure Time: "+departureDate+"<br />"+"Departure Delay: "+departureDelay;
       row.appendChild(Card2);
 
       // Card 3 - Time of arrival, Arrival delay
-      const Card3 = document.createElement('div');
-      Card3.classList.add('card-body','card');
-      Card3.textContent = arrivalDelay;
+      Card3 = NewCard()
+      Card3.children[0].innerHTML = "Arrival Time: "+arrivalDate+"<br />"+"Arrival Delay: "+arrivalDelay;
       row.appendChild(Card3);
 
       element.appendChild(row);
-      // Original Version 
-
-      // // Create div for response data to be placed into
-      // const row = document.createElement('div');
-      // // Place each response into a seperate row
-      // row.classList.add('row');
-      
-      // // Create cards
-      // const card = document.createElement('div');
-      // card.classList.add('card-body','card');
-
-      // // Populate cards with data from response
-      // const body = document.createElement('p');
-      // body.textContent = "Airline: "+item.airline.name;
-      // body.textContent += "Flight number: "+item.flight.number
-      
-      // const card2 = document.createElement('div');
-      // card2.classList.add('card-body','card');
-
-      // const body2 = document.createElement('p');
-      // body2.textContent = "Minutes Delay on Depature: "+item.departure.delay;
-      // body2.textContent += "Time of Departure: "+item.departure.actualTime;
-
-
-      // row.appendChild(card);
-      // card.appendChild(body);
-      // row.appendChild(card2);
-      // card2.appendChild(body2);
-      // element.appendChild(row);
     })
-    // For Item in Json
-    // Create CARD [0.arrival.date]
-    // Create CARD HTMLtext+[1.arrival.delay]
-
+    }
     function NewCard() {
+
+      // Create each Card as a card and column to ensure correct layout.
       const Card = document.createElement('div');
-      Card.classList.add('card');
+      Card.classList.add('card', 'col-sm');
       const CardBody = document.createElement('div');
       CardBody.classList.add('card-body');
       CardBody.textconent = "";
       Card.appendChild(CardBody)
       return Card
-
-    }
 }
