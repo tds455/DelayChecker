@@ -19,16 +19,9 @@
               <h5 class="card-title">Please select arrival airport code and flight number</h5>
             </div>
             <div class="justify-content-between">
-                <div class="input-group mb-2 pl-2 pr-2">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Arrival Airport Code</button>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Separated link</a></li>
-                    </ul>
-                    <input type="text" class="form-control" id="FormInput" placeholder="Flight #" aria-label="Text input with dropdown button">
+                  <div class="input-group mb-2 pl-2 pr-2">
+                    <input type="text" class="form-control" id="FormInputAirport" placeholder="Arrival airport IATA code" >
+                    <input type="text" class="form-control" id="FormInputFlight" placeholder="Flight #" >
                   </div>
                   <div class="col-12">
                     <button onclick="InputValidation()" class="btn btn-primary mb-2">Submit</button>
