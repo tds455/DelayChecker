@@ -4,3 +4,7 @@ body{
     background-color: #dbdbdb;
     margin-top: 60px;
  }
+
+ .card{
+    min-height:100px;
+ }

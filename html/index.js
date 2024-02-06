@@ -63,22 +63,26 @@ function CreateCards(data) {
       const row = document.createElement('div');
       row.classList.add('row')
       // Create Each card in it's own column
-      for (let i = 0; i < 2; i++) {
-        let column = document.createElement('div')
-        column.classList.add('col-sm')
-        let card = document.createElement('div')
-        card.classList.add('card')
-        column.appendChild(card)
-        row.appendChild(column)
-      }
 
-      
       // Card 1 - Date, Airline, Flight number
+      const Card1 = document.createElement('div')
+      Card1.classList.add('card')
+      Card1.textcontent = "Departure Date: "+departureDate+"Airline Name: "+airlineName+"Flight Number: "+flightNumber;
+      
 
       // Card 2 - Time of departure, Departure delay
-
+      const Card2 = document.createElement('div') 
       // Card 3 - Time of arrival, Arrival delay
+      const Card3 = document.createElement('div')
       
+      row.appendChild(Card1, Card2, Card3)
+
+      element.appendChild(row)  
+
+    
+
+      
+
 
 
       // Original Version 
