@@ -12,6 +12,17 @@ async function InputValidation() {
   console.log(FlightInput)
   // Error Checking
 
+  // Build Request
+
+  // Step 1 - Airport code
+
+  // Step 2 - Date range
+
+  // Find 4 days in past and then 30 days prior
+
+  // Step 3 Flight #
+
+  
   // Pass Parameters
   let data = await MakeRequest()
 
