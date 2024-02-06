@@ -48,11 +48,13 @@ async function MakeRequest()  {
 
 function CreateCards(data) {
   
+    // Link HTML element where cards will be placed
     const element = document.getElementById("ResponseCards");
 
+    // Iterate over each object in the response JSON.
     data.forEach(item => {
 
-      // Info required for each entry
+      // Info required for each entry taken from response JSON.
       departureDate = item.departure.actualTime
       airlineName = item.airline.name
       flightNumber = item.flight.number
@@ -60,16 +62,21 @@ function CreateCards(data) {
       arrivalDate = item.arrival.actualTime
       arrivalDelay = item.arrival.delay
 
-      // Create Row 
+      // Create Row for each object
       const row = document.createElement('div');
+      // Add bootstrap class "row"
       row.classList.add('row');
-      // Create Each card in it's own column
+
+      // Call the NewCard function which creates an object with the classes "Card col-sm" and "card-body".
+      // This will create aligned elements that only require innerHTML to be updated.
       
+      // Create Card 1 which displays Airline info and Flight number
+      // Appends each card to the row element.
       Card1 = NewCard()
       Card1.children[0].innerHTML = "Airline Name: "+airlineName+"<br />"+"Flight Number: "+flightNumber;
       row.appendChild(Card1);
       
-
+      // Create Card 2 which displays Departure date/time and delay.
       Card2 = NewCard()
       Card2.children[0].innerHTML = "Departure Time: "+departureDate+"<br />"+"Departure Delay: "+departureDelay;
       row.appendChild(Card2);
@@ -79,6 +86,7 @@ function CreateCards(data) {
       Card3.children[0].innerHTML = "Arrival Time: "+arrivalDate+"<br />"+"Arrival Delay: "+arrivalDelay;
       row.appendChild(Card3);
 
+      // Append the row to the main element.
       element.appendChild(row);
     })
     }
