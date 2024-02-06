@@ -6,7 +6,8 @@ let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/Fli
 
 async function InputValidation() {
   // Perform Input Validation
-
+  const FormInput =  document.getElementById('FormInput').value 
+  console.log(FormInput)
   // Error Checking
 
   // Pass Parameters
