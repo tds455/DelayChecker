@@ -17,7 +17,7 @@ async function InputValidation() {
   // -4 days from current
   let EndDate = daysAgo(4).toISOString().slice(0, 10);
   // -30 days from current
-  let StartDate = daysAgo(30).toISOString().slice(0, 10);
+  let StartDate = daysAgo(12).toISOString().slice(0, 10);
 
 
   // Create params object
@@ -50,12 +50,15 @@ async function InputValidation() {
   CreateCards(data)
 
 }
+// let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?code=KIX&type=arrival&date_from=2024-01-15&date_to=2024-01-16&flight_number=711';
 
 async function MakeRequest(params)  { 
-
-  const response = await fetch(apiUrl)
-
-  const data = await response.json()
+  let ParamsStr = apiUrl+"code="+params["AirportIATA"]+"&type=arrival&"+"date_from="+params["StartDate"]+"&date_to="+params["EndDate"]+"&flight_number="+params["FlightNumber"]
+  console.log(ParamsStr)
+  const response = await fetch(ParamsStr);
+  console.log(response)
+  const data = await response.json();
+  console.log(data)
   return data
 
 
