@@ -12,7 +12,20 @@ async function InputValidation() {
   console.log(FlightInput)
   // Error Checking
 
-  // Build Request
+  // Find Date range
+  // -4 days from current
+  let EndDate = daysAgo(4);
+  // -30 days from current
+  let StartDate = daysAgo(30);
+
+
+  // Create params object
+  let params = {
+    "AirportIATA": AirportInput,
+    "FlightNumber": FlightInput,
+    "StartDate": StartDate,
+    "EndDate": EndDate,
+  }
 
   // Step 1 - Airport code
 
@@ -22,9 +35,10 @@ async function InputValidation() {
 
   // Step 3 Flight #
 
-  
+
+
   // Pass Parameters
-  let data = await MakeRequest()
+  let data = await MakeRequest(params)
 
   // if response = error
   // Update footer to show error message
@@ -35,7 +49,7 @@ async function InputValidation() {
 
 }
 
-async function MakeRequest()  { 
+async function MakeRequest(params)  { 
   const response = await fetch(apiUrl)
 
   const data = await response.json()
@@ -104,14 +118,21 @@ function CreateCards(data) {
       element.appendChild(row);
     })
     }
-    function NewCard() {
+function NewCard() {
 
-      // Create each Card as a card and column to ensure correct layout.
-      const Card = document.createElement('div');
-      Card.classList.add('card', 'col-sm');
-      const CardBody = document.createElement('div');
-      CardBody.classList.add('card-body');
-      CardBody.textconent = "";
-      Card.appendChild(CardBody)
-      return Card
+    // Create each Card as a card and column to ensure correct layout.
+    const Card = document.createElement('div');
+    Card.classList.add('card', 'col-sm');
+    const CardBody = document.createElement('div');
+    CardBody.classList.add('card-body');
+    CardBody.textconent = "";
+    Card.appendChild(CardBody)
+    return Card
+}
+
+function daysAgo(n) {
+    // Calculate n days in the past
+    date = new Date()
+    date.setDate(date.getDate() - Math.abs(n))
+    return date
 }
