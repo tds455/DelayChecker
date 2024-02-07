@@ -137,7 +137,7 @@ function NewCard() {
 
 function daysAgo(n) {
     // Calculate n days in the past
-    date = new Date()
+    date = new Date().toISOString().slice(0, 10)
     date.setDate(date.getDate() - Math.abs(n))
     return date
 }
