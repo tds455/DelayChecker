@@ -27,6 +27,7 @@ async function InputValidation() {
     "EndDate": EndDate,
   }
 
+  console.log(params)
   // Step 1 - Airport code
 
   // Step 2 - Date range
@@ -50,6 +51,10 @@ async function InputValidation() {
 }
 
 async function MakeRequest(params)  { 
+  console.log(params["AirportIATA"])
+  console.log(params["FlightNumber"])
+  console.log(params["StartDate"])
+  console.log(params["EndDate"])
   const response = await fetch(apiUrl)
 
   const data = await response.json()
