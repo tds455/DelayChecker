@@ -1,7 +1,8 @@
 
 // Process form input and create API url
 
-let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?code=KIX&type=arrival&date_from=2024-01-15&date_to=2024-01-16&flight_number=711';
+// let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?code=KIX&type=arrival&date_from=2024-01-15&date_to=2024-01-16&flight_number=711';
+let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?'
 // Make a GET request
 
 async function InputValidation() {
@@ -12,7 +13,7 @@ async function InputValidation() {
   console.log(FlightInput)
   // Error Checking
 
-  // Find Date range
+  // Find Date range and convert to YYYY-MM-DD
   // -4 days from current
   let EndDate = daysAgo(4).toISOString().slice(0, 10);
   // -30 days from current
@@ -51,10 +52,7 @@ async function InputValidation() {
 }
 
 async function MakeRequest(params)  { 
-  console.log(params["AirportIATA"])
-  console.log(params["FlightNumber"])
-  console.log(params["StartDate"])
-  console.log(params["EndDate"])
+
   const response = await fetch(apiUrl)
 
   const data = await response.json()
