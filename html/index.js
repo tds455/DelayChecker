@@ -14,9 +14,9 @@ async function InputValidation() {
 
   // Find Date range
   // -4 days from current
-  let EndDate = daysAgo(4);
+  let EndDate = daysAgo(4).toISOString().slice(0, 10);
   // -30 days from current
-  let StartDate = daysAgo(30);
+  let StartDate = daysAgo(30).toISOString().slice(0, 10);
 
 
   // Create params object
@@ -137,7 +137,8 @@ function NewCard() {
 
 function daysAgo(n) {
     // Calculate n days in the past
-    date = new Date().toISOString().slice(0, 10)
+    date = new Date()
     date.setDate(date.getDate() - Math.abs(n))
+    date
     return date
 }
