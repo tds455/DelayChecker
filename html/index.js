@@ -9,8 +9,6 @@ async function InputValidation() {
   // Perform Input Validation
   const AirportInput =  document.getElementById('FormInputAirport').value 
   const FlightInput =  document.getElementById('FormInputFlight').value 
-  console.log(AirportInput)
-  console.log(FlightInput)
   // Error Checking
 
   // Find Date range and convert to YYYY-MM-DD
@@ -28,7 +26,6 @@ async function InputValidation() {
     "EndDate": EndDate,
   }
 
-  console.log(params)
   // Step 1 - Airport code
 
   // Step 2 - Date range
@@ -54,11 +51,8 @@ async function InputValidation() {
 
 async function MakeRequest(params)  { 
   let ParamsStr = apiUrl+"code="+params["AirportIATA"]+"&type=arrival&"+"date_from="+params["StartDate"]+"&date_to="+params["EndDate"]+"&flight_number="+params["FlightNumber"]
-  console.log(ParamsStr)
   const response = await fetch(ParamsStr);
-  console.log(response)
   const data = await response.json();
-  console.log(data)
   return data
 
 
