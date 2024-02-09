@@ -10,14 +10,7 @@ var letters = /^[A-Za-z]+$/;
 async function InputValidation() {
   // Perform Input Validation
   const AirportInput =  document.getElementById('FormInputAirport').value
-    if(AirportInput.value.match(letters)) {
-      return true
-      }
-    else {
-      // Set HTML footer to show error message
-      return false
-    }
-
+  validateTest(AirportInput)
   // Input validation is performed in HTML
   const FlightInput =  document.getElementById('FormInputFlight').value 
 
@@ -148,4 +141,14 @@ function daysAgo(n) {
     date.setDate(date.getDate() - Math.abs(n))
     date
     return date
+}
+
+function validateText(input) {
+  if(input.value.match(letters)){
+    return true
+  }
+  else {
+    // Update footer in HTML
+    throw new Error("Incorrect Input")
+  }
 }
