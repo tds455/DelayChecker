@@ -1,11 +1,6 @@
-
-// Process form input and create API url
-
-// let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?code=KIX&type=arrival&date_from=2024-01-15&date_to=2024-01-16&flight_number=711';
+// Middleware URL is hard-coded for now, but may change to be passed as a docker environment variable.
 let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?'
 let regex = /^[A-Za-z]+$/;
-
-// Make a GET request
 
 function InputValidation() {
 
