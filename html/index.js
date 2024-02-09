@@ -7,26 +7,29 @@ let regex = /^[A-Za-z]+$/;
 
 // Make a GET request
 
-async function InputValidation() {
+function InputValidation() {
+
+  // Input validation is performed in HTML for FlightInput
+  const FlightInput =  document.getElementById('FormInputFlight').value 
+  
   // Perform Input Validation
   const AirportInput =  document.getElementById('FormInputAirport').value
   if(regex.test(AirportInput)) {
-    console.log("True")
+    BuildParams(AirportInput, FlightInput)
   }
   else {
     console.log("False")
+    // Update HTML footer to show error message
   }
-  // Input validation is performed in HTML
-  const FlightInput =  document.getElementById('FormInputFlight').value 
+}
 
-  // Error Checking
+async function BuildParams(AirportInput, FlightInput) {
 
   // Find Date range and convert to YYYY-MM-DD
   // -4 days from current
   let EndDate = daysAgo(4).toISOString().slice(0, 10);
   // -30 days from current
   let StartDate = daysAgo(12).toISOString().slice(0, 10);
-
 
   // Create params object
   let params = {
@@ -36,16 +39,6 @@ async function InputValidation() {
     "EndDate": EndDate,
   }
 
-  // Step 1 - Airport code
-
-  // Step 2 - Date range
-
-  // Find 4 days in past and then 30 days prior
-
-  // Step 3 Flight #
-
-
-
   // Pass Parameters
   let data = await MakeRequest(params)
 
@@ -53,11 +46,8 @@ async function InputValidation() {
   // Update footer to show error message
 
   // Otherwise, CreateCards()
-
   CreateCards(data)
-
 }
-// let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?code=KIX&type=arrival&date_from=2024-01-15&date_to=2024-01-16&flight_number=711';
 
 async function MakeRequest(params)  { 
   let ParamsStr = apiUrl+"code="+params["AirportIATA"]+"&type=arrival&"+"date_from="+params["StartDate"]+"&date_to="+params["EndDate"]+"&flight_number="+params["FlightNumber"]
