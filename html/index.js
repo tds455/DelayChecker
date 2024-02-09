@@ -3,12 +3,24 @@
 
 // let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?code=KIX&type=arrival&date_from=2024-01-15&date_to=2024-01-16&flight_number=711';
 let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?'
+var letters = /^[A-Za-z]+$/;
+
 // Make a GET request
 
 async function InputValidation() {
   // Perform Input Validation
-  const AirportInput =  document.getElementById('FormInputAirport').value 
+  const AirportInput =  document.getElementById('FormInputAirport').value
+    if(AirportInput.value.match(letters)) {
+      return true
+      }
+    else {
+      // Set HTML footer to show error message
+      return false
+    }
+
+  // Input validation is performed in HTML
   const FlightInput =  document.getElementById('FormInputFlight').value 
+
   // Error Checking
 
   // Find Date range and convert to YYYY-MM-DD
