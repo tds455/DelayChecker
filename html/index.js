@@ -13,7 +13,8 @@ function InputValidation() {
     BuildParams(AirportInput, FlightInput)
   }
   else {
-    console.log("False")
+    const footer = document.getElementById("CardFooter")
+    footer.textContent = "Incorrect input detected"
     // Update HTML footer to show error message
   }
 }
@@ -120,7 +121,7 @@ function NewCard() {
     Card.classList.add('card', 'col-sm');
     const CardBody = document.createElement('div');
     CardBody.classList.add('card-body');
-    CardBody.textconent = "";
+    CardBody.textcontent = "";
     Card.appendChild(CardBody)
     return Card
 }
