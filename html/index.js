@@ -7,7 +7,7 @@ function InputValidation() {
   // Clear any previous results and messages
   const element = document.getElementById("ResponseCards");
   element.textContent = ""
-  const footer = document.getElementById("CardFooter")
+  const footer = document.getElementById("FooterText")
   footer.textContent = ""
 
   // Input validation is performed in HTML for FlightInput
