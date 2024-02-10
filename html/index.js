@@ -8,7 +8,7 @@ function InputValidation() {
   const element = document.getElementById("ResponseCards");
   element.textContent = ""
   const footer = document.getElementById("FooterText")
-  footer.textContent = ""
+  footer.textContent = "᠎"
 
   // Input validation is performed in HTML for FlightInput
   const FlightInput =  document.getElementById('FormInputFlight').value 
@@ -54,8 +54,23 @@ async function BuildParams(AirportInput, FlightInput) {
 async function MakeRequest(params)  { 
   let ParamsStr = apiUrl+"code="+params["AirportIATA"]+"&type=arrival&"+"date_from="+params["StartDate"]+"&date_to="+params["EndDate"]+"&flight_number="+params["FlightNumber"]
   const response = await fetch(ParamsStr);
-  const data = await response.json();
-  return data
+
+  if (!response.ok) {
+    console.log(response)
+    const footer = document.getElementById("FooterText")
+    footer.textContent = response    
+  }
+  else {
+    const data = await response.json();
+    return data
+  } 
+  
+
+
+  // Catch Errors
+  // const footer = document.getElementById("FooterText")
+  // footer.textContent = "᠎"
+
 
 
   // fetch(apiUrl)  
