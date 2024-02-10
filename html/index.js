@@ -19,7 +19,7 @@ function InputValidation() {
     BuildParams(AirportInput, FlightInput)
   }
   else {
-    const footer = document.getElementById("CardFooter")
+    const footer = document.getElementById("FooterText")
     footer.textContent = "Incorrect input detected"
     // Update HTML footer to show error message
   }
