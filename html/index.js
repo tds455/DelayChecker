@@ -4,6 +4,12 @@ let regex = /^[A-Za-z]+$/;
 
 function InputValidation() {
 
+  // Clear any previous results and messages
+  const element = document.getElementById("ResponseCards");
+  element.textContent = ""
+  const footer = document.getElementById("CardFooter")
+  footer.textContent = ""
+
   // Input validation is performed in HTML for FlightInput
   const FlightInput =  document.getElementById('FormInputFlight').value 
   
