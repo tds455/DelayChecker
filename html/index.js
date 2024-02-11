@@ -72,7 +72,6 @@ async function MakeRequest(params)  {
   }
   else {
     const data = await response.json()
-    console.log(data.success)
     return data
   } 
   
@@ -130,7 +129,8 @@ function CreateCards(data) {
       // Create Card 1 which displays Airline info and Flight number
       // Appends each card to the row element.
       Card1 = NewCard()
-      Card1.children[0].innerHTML = "Airline Name: "+airlineName+"<br />"+"Flight Number: "+flightNumber;
+      Card1.children[0].children[0].innerHTML = "Airline Name: "+"<br />"+airlineName;
+      Card1.children[0].children[1].innerHTML = "Flight Number: "+"<br />"+flightNumber;
       row.appendChild(Card1);
       
       // Create Card 2 which displays Departure date/time and delay.
@@ -155,6 +155,16 @@ function NewCard() {
     const CardBody = document.createElement('div');
     CardBody.classList.add('card-body');
     CardBody.textcontent = "";
+    // Add element h5 class card-title
+    const CardTitle1 = document.createElement('h5')
+    CardTitle1.classList.add('card-title')
+    CardTitle1.textcontent = "";
+   // add element p class card-text
+    const CardText1 = document.createElement('p')
+    CardText1.classList.add('card-text')
+    CardText1.textContent = "";
+    CardBody.appendChild(CardTitle1)
+    CardBody.appendChild(CardText1)
     Card.appendChild(CardBody)
     return Card
 }
