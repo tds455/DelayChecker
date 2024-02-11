@@ -2,6 +2,7 @@
 let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?'
 let regex = /^[A-Za-z]+$/;
 const footer = document.getElementById("FooterText")
+const loading = document.getElementById("loading")
 
 function InputValidation() {
 
@@ -30,9 +31,9 @@ async function BuildParams(AirportInput, FlightInput) {
 
   // Find Date range and convert to YYYY-MM-DD
   // -4 days from current
-  let EndDate = daysAgo(4).toISOString().slice(0, 10);
+  let EndDate = DaysAgo(4).toISOString().slice(0, 10);
   // -12 days from current
-  let StartDate = daysAgo(12).toISOString().slice(0, 10);
+  let StartDate = DaysAgo(12).toISOString().slice(0, 10);
 
   // Create params object
   let params = {
@@ -47,6 +48,7 @@ async function BuildParams(AirportInput, FlightInput) {
 
   if (data.hasOwnProperty("error")) {
     footer.textContent = "No records found"
+    RemoveSpinner()
   }
   else {
     CreateCards(data)
@@ -64,11 +66,14 @@ async function BuildParams(AirportInput, FlightInput) {
 
 async function MakeRequest(params)  { 
 
+  AddSpinner()
+
   let ParamsStr = apiUrl+"code="+params["AirportIATA"]+"&type=arrival&"+"date_from="+params["StartDate"]+"&date_to="+params["EndDate"]+"&flight_number="+params["FlightNumber"]
   const response = await fetch(ParamsStr);
 
   if (!response.ok) {
-    footer.textContent = response    
+    footer.textContent = response   
+    RemoveSpinner()
   }
   else {
     const data = await response.json()
@@ -102,6 +107,8 @@ async function MakeRequest(params)  {
   }
 
 function CreateCards(data) {
+
+    
   
     // Link HTML element where cards will be placed
     const element = document.getElementById("ResponseCards");
@@ -160,6 +167,7 @@ function CreateCards(data) {
 
       // Append the row to the main element.
       element.appendChild(row);
+      RemoveSpinner()
     })
     }
 function NewCard() {
@@ -184,7 +192,7 @@ function NewCard() {
     return Card
 }
 
-function daysAgo(n) {
+function DaysAgo(n) {
     // Calculate n days in the past
     date = new Date()
     date.setDate(date.getDate() - Math.abs(n))
@@ -192,3 +200,12 @@ function daysAgo(n) {
     return date
 }
 
+function RemoveSpinner() {
+  loading.classList.remove('hidden0')
+  loading.classList.add('hidden1') 
+}
+
+function AddSpinner() {
+  loading.classList.remove('hidden1')
+  loading.classList.add('hidden0') 
+}

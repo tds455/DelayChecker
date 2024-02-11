@@ -9,3 +9,12 @@ body{
     min-height:100px;
  }
 
+.hidden1{
+   visibility: Hidden;
+   text-align: center;
+}
+
+.hidden0 {
+   visibility: visible;
+   text-align: center;
+}
