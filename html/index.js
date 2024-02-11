@@ -2,6 +2,7 @@
 let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?'
 // Initialise regex to be used for input validation
 let regex = /^[A-Za-z]+$/;
+let regexNum = /^[0-9]*$/;
 // Initialse global HTML variables
 const footer = document.getElementById("FooterText")
 const loading = document.getElementById("loading")
@@ -14,13 +15,15 @@ function InputValidation() {
   const footer = document.getElementById("FooterText")
   footer.textContent = "᠎"
 
-  // Input validation is performed in HTML for FlightInput
-  const FlightInput =  document.getElementById('FormInputFlight').value 
+  // Remove any non-numerical characets from FlightInput
+  // We still need to allow input of alphanumerical characters so users can use callsigns
+  const FlightInput =  document.getElementById('FormInputFlight').value.replace(/\D/g,'')
   
-  // Perform Input Validation
+  // Perform Input Validation on AirportInput
   const AirportInput =  document.getElementById('FormInputAirport').value
+
   // Reject any non a-Z inputs
-  if(regex.test(AirportInput)) {
+  if((regex.test(AirportInput))&&(regexNum.test(FlightInput))) {
     // Pass input to BuildParams function
     BuildParams(AirportInput, FlightInput)
   }
