@@ -57,7 +57,7 @@ async function BuildParams(AirportInput, FlightInput) {
   if (data.hasOwnProperty("error")) {
     footer.textContent = "No records found"
     // Remove loading spinner and reenable submit button
-    RemoveSpinner()
+    ToggleSpinner()
     ToggleSubmit()
   }
   else {
@@ -68,7 +68,7 @@ async function BuildParams(AirportInput, FlightInput) {
 
 async function MakeRequest(params)  { 
   // Add loading spinner while request in progress
-  AddSpinner()
+  ToggleSpinner()
 
   // Disabled submit button
   ToggleSubmit()
@@ -82,7 +82,7 @@ async function MakeRequest(params)  {
   if (!response.ok) {
     footer.textContent = response.textContent 
     // Remove loading spinner  
-    RemoveSpinner()
+    ToggleSpinner()
     // Reenable submit button
     ToggleSubmit()
   }
@@ -154,7 +154,7 @@ function CreateCards(data) {
       element.appendChild(row);
 
       // Remove loading spinner and reenable submit button
-      RemoveSpinner()
+      ToggleSpinner()
       ToggleSubmit()
     })
     }
@@ -194,16 +194,9 @@ function DaysAgo(n) {
     return date
 }
 
-function RemoveSpinner() {
-  // Hide loading spinner
-  loading.classList.remove('hidden0')
-  loading.classList.add('hidden1') 
-}
-
-function AddSpinner() {
-  // Hide loading spinner
-  loading.classList.remove('hidden1')
-  loading.classList.add('hidden0') 
+function ToggleSpinner() {
+  // Toggle status of loading spinner
+  loading.classList.toggle('spinnerHidden')
 }
 
 function ToggleSubmit() {

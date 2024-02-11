@@ -9,12 +9,6 @@ body{
     min-height:100px;
  }
 
-.hidden1{
+.spinnerHidden{
    visibility: Hidden;
-   text-align: center;
-}
-
-.hidden0 {
-   visibility: visible;
-   text-align: center;
 }
