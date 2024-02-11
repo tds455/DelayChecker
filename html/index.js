@@ -56,7 +56,9 @@ async function BuildParams(AirportInput, FlightInput) {
   // Return an error message
   if (data.hasOwnProperty("error")) {
     footer.textContent = "No records found"
+    // Remove loading spinner and reenable submit button
     RemoveSpinner()
+    ToggleSubmit()
   }
   else {
     // Pass response data to CreateCards function
@@ -68,6 +70,9 @@ async function MakeRequest(params)  {
   // Add loading spinner while request in progress
   AddSpinner()
 
+  // Disabled submit button
+  ToggleSubmit()
+
   // Build parameters string to be appended to GET request
   let ParamsStr = apiUrl+"code="+params["AirportIATA"]+"&type=arrival&"+"date_from="+params["StartDate"]+"&date_to="+params["EndDate"]+"&flight_number="+params["FlightNumber"]
   // Await response from middleware API
@@ -78,6 +83,8 @@ async function MakeRequest(params)  {
     footer.textContent = response.textContent 
     // Remove loading spinner  
     RemoveSpinner()
+    // Reenable submit button
+    ToggleSubmit()
   }
   else {
     // If successful response received, convert to JSON and return
@@ -146,8 +153,9 @@ function CreateCards(data) {
       // Append the row to the main element.
       element.appendChild(row);
 
-      // Remove loading spinner 
+      // Remove loading spinner and reenable submit button
       RemoveSpinner()
+      ToggleSubmit()
     })
     }
 function NewCard() {
@@ -196,4 +204,18 @@ function AddSpinner() {
   // Hide loading spinner
   loading.classList.remove('hidden1')
   loading.classList.add('hidden0') 
+}
+
+function ToggleSubmit() {
+  // Toggle disabled state on submit button
+  // Disable submit button
+  const SubmitButton = document.getElementById("SubmitButton")
+  if (SubmitButton.hasAttribute("disabled")) {
+    SubmitButton.removeAttribute("disabled")
+    SubmitButton.textContent = "Submit"
+  }
+  else {
+    SubmitButton.setAttribute("disabled","")
+    SubmitButton.textContent = "Please Wait"
+  }
 }
