@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Define environment variables if needed
-        DOCKER_IMAGE = 'delaychecker'
+        DOCKER_IMAGE = 'tom455/delaychecker'
     }
 
     stages {
