@@ -1,6 +1,7 @@
 // Middleware URL is hard-coded for now, but may change to be passed as a docker environment variable.
 let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?'
 let regex = /^[A-Za-z]+$/;
+const footer = document.getElementById("FooterText")
 
 function InputValidation() {
 
@@ -44,24 +45,34 @@ async function BuildParams(AirportInput, FlightInput) {
   // Pass Parameters
   let data = await MakeRequest(params)
 
+  if (data.hasOwnProperty("error")) {
+    footer.textContent = "No records found"
+  }
+  else {
+    CreateCards(data)
+  }
+
+  
+  
+
   // if response = error
   // Update footer to show error message
 
   // Otherwise, CreateCards()
-  CreateCards(data)
+  
 }
 
 async function MakeRequest(params)  { 
+
   let ParamsStr = apiUrl+"code="+params["AirportIATA"]+"&type=arrival&"+"date_from="+params["StartDate"]+"&date_to="+params["EndDate"]+"&flight_number="+params["FlightNumber"]
   const response = await fetch(ParamsStr);
 
   if (!response.ok) {
-    console.log(response)
-    const footer = document.getElementById("FooterText")
     footer.textContent = response    
   }
   else {
-    const data = await response.json();
+    const data = await response.json()
+    console.log(data.success)
     return data
   } 
   
@@ -95,6 +106,7 @@ function CreateCards(data) {
   
     // Link HTML element where cards will be placed
     const element = document.getElementById("ResponseCards");
+
 
     // Iterate over each object in the response JSON.
     data.forEach(item => {
