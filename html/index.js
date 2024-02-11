@@ -31,7 +31,7 @@ async function BuildParams(AirportInput, FlightInput) {
   // Find Date range and convert to YYYY-MM-DD
   // -4 days from current
   let EndDate = daysAgo(4).toISOString().slice(0, 10);
-  // -30 days from current
+  // -12 days from current
   let StartDate = daysAgo(12).toISOString().slice(0, 10);
 
   // Create params object
@@ -151,7 +151,7 @@ function NewCard() {
 
     // Create each Card as a card and column to ensure correct layout.
     const Card = document.createElement('div');
-    Card.classList.add('card', 'col-sm');
+    Card.classList.add('card', 'col-4', 'pl-0', 'pr-0');
     const CardBody = document.createElement('div');
     CardBody.classList.add('card-body');
     CardBody.textcontent = "";
