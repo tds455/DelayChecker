@@ -1,6 +1,8 @@
 // Middleware URL is hard-coded for now, but may change to be passed as a docker environment variable.
 let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?'
+// Initialise regex to be used for input validation
 let regex = /^[A-Za-z]+$/;
+// Initialse global HTML variables
 const footer = document.getElementById("FooterText")
 const loading = document.getElementById("loading")
 
@@ -17,7 +19,9 @@ function InputValidation() {
   
   // Perform Input Validation
   const AirportInput =  document.getElementById('FormInputAirport').value
+  // Reject any non a-Z inputs
   if(regex.test(AirportInput)) {
+    // Pass input to BuildParams function
     BuildParams(AirportInput, FlightInput)
   }
   else {
@@ -33,6 +37,8 @@ async function BuildParams(AirportInput, FlightInput) {
   // -4 days from current
   let EndDate = DaysAgo(4).toISOString().slice(0, 10);
   // -12 days from current
+  // NOTE - DUE TO API ISSUES DATE RANGE IS CURRENT 4-12 DAYS PRIOR.
+  // THIS IS INTENDED TO BE 3-30 DAYS.
   let StartDate = DaysAgo(12).toISOString().slice(0, 10);
 
   // Create params object
@@ -43,86 +49,59 @@ async function BuildParams(AirportInput, FlightInput) {
     "EndDate": EndDate,
   }
 
-  // Pass Parameters
+  // Pass Parameters to MakeRequest function for middleware api call
   let data = await MakeRequest(params)
 
+  // If response contains no values and therefore has property "error"
+  // Return an error message
   if (data.hasOwnProperty("error")) {
     footer.textContent = "No records found"
     RemoveSpinner()
   }
   else {
+    // Pass response data to CreateCards function
     CreateCards(data)
   }
-
-  
-  
-
-  // if response = error
-  // Update footer to show error message
-
-  // Otherwise, CreateCards()
-  
 }
 
 async function MakeRequest(params)  { 
-
+  // Add loading spinner while request in progress
   AddSpinner()
 
+  // Build parameters string to be appended to GET request
   let ParamsStr = apiUrl+"code="+params["AirportIATA"]+"&type=arrival&"+"date_from="+params["StartDate"]+"&date_to="+params["EndDate"]+"&flight_number="+params["FlightNumber"]
+  // Await response from middleware API
   const response = await fetch(ParamsStr);
 
+  // If an error message is recieved, pass textcontent to HTML
   if (!response.ok) {
-    footer.textContent = response   
+    footer.textContent = response.textContent 
+    // Remove loading spinner  
     RemoveSpinner()
   }
   else {
+    // If successful response received, convert to JSON and return
     const data = await response.json()
     return data
   } 
   
-
-
-  // Catch Errors
-  // const footer = document.getElementById("FooterText")
-  // footer.textContent = "᠎"
-
-
-
-  // fetch(apiUrl)  
-  //   .then(response => {
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //       console.log("Error")
-  //       // Set footer to show error message
-  //     }
-  //     return response.json();
-  //   })
-  //   .then(data => {
-  //     // For now log data to console while testing
-  //     console.log(data);
-  //   })
-  //   .catch(error => {
-  //     console.error('Error:', error);
-  //   });
   }
 
 function CreateCards(data) {
 
-    
-  
     // Link HTML element where cards will be placed
     const element = document.getElementById("ResponseCards");
-
 
     // Iterate over each object in the response JSON.
     data.forEach(item => {
 
       // Info required for each entry taken from response JSON.
-      departureDate = item.departure.actualTime.slice(0,16).replace("t"," ")
       airlineName = item.airline.name
       flightNumber = item.flight.number
+      // Format dates to YYYY-MM-DD HH-MM format and remove any unneccesary characters
       arrivalDate = item.arrival.actualTime.slice(0,16).replace("t"," ")
-      // arrivalDate = arrivalDate
+      departureDate = item.departure.actualTime.slice(0,16).replace("t"," ")
+
       // Check if departure or arrival delays have returned as "undefined" - If so set as 0
       if (item.departure.delay === undefined) {
         departureDelay = 0+" Minutes"
@@ -137,7 +116,6 @@ function CreateCards(data) {
         arrivalDelay = item.arrival.delay+ " Minutes"
       }
       
-
       // Create Row for each object
       const row = document.createElement('div');
       // Add bootstrap class "row"
@@ -167,6 +145,8 @@ function CreateCards(data) {
 
       // Append the row to the main element.
       element.appendChild(row);
+
+      // Remove loading spinner 
       RemoveSpinner()
     })
     }
@@ -174,18 +154,24 @@ function NewCard() {
 
     // Create each Card as a card and column to ensure correct layout.
     const Card = document.createElement('div');
-    Card.classList.add('card', 'col-4', 'pl-0', 'pr-0', 'text-center', 'mt-4');
+    
+    // Overwrite any bootstrap padding values
+    Card.classList.add('card', 'col-4', 'p-0', 'text-center', 'mt-4');
+    
+    // Create CardBody element to contain text elements
     const CardBody = document.createElement('div');
     CardBody.classList.add('card-body');
     CardBody.textcontent = "";
-    // Add element h5 class card-title
+
+    // Add CardTitle1 and CardText1 as h5 elements
     const CardTitle1 = document.createElement('h5')
     CardTitle1.classList.add('card-title')
-    CardTitle1.textcontent = "";
-   // add element p class card-text
+
     const CardText1 = document.createElement('h5')
     CardText1.classList.add('card-text')
-    CardText1.textContent = "";
+ 
+
+    // Append children to appropiate parent element
     CardBody.appendChild(CardTitle1)
     CardBody.appendChild(CardText1)
     Card.appendChild(CardBody)
@@ -201,11 +187,13 @@ function DaysAgo(n) {
 }
 
 function RemoveSpinner() {
+  // Hide loading spinner
   loading.classList.remove('hidden0')
   loading.classList.add('hidden1') 
 }
 
 function AddSpinner() {
+  // Hide loading spinner
   loading.classList.remove('hidden1')
   loading.classList.add('hidden0') 
 }
