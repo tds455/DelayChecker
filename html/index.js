@@ -111,12 +111,25 @@ function CreateCards(data) {
     data.forEach(item => {
 
       // Info required for each entry taken from response JSON.
-      departureDate = item.departure.actualTime
+      departureDate = item.departure.actualTime.slice(0,16).replace("t"," ")
       airlineName = item.airline.name
       flightNumber = item.flight.number
-      departureDelay = item.departure.delay
-      arrivalDate = item.arrival.actualTime
-      arrivalDelay = item.arrival.delay
+      arrivalDate = item.arrival.actualTime.slice(0,16).replace("t"," ")
+      // arrivalDate = arrivalDate
+      // Check if departure or arrival delays have returned as "undefined" - If so set as 0
+      if (item.departure.delay === undefined) {
+        departureDelay = 0+" Minutes"
+      }
+      else {
+        departureDelay = item.departure.delay+" Minutes"
+      }
+      if (item.arrival.delay === undefined) {
+        arrivalDelay = 0+" Minutes"
+      }
+      else {
+        arrivalDelay = item.arrival.delay+ " Minutes"
+      }
+      
 
       // Create Row for each object
       const row = document.createElement('div');
@@ -129,18 +142,20 @@ function CreateCards(data) {
       // Create Card 1 which displays Airline info and Flight number
       // Appends each card to the row element.
       Card1 = NewCard()
-      Card1.children[0].children[0].innerHTML = "Airline Name: "+"<br />"+airlineName;
-      Card1.children[0].children[1].innerHTML = "Flight Number: "+"<br />"+flightNumber;
+      Card1.children[0].children[0].innerHTML = "Airline Name: "+"<br />"+airlineName
+      Card1.children[0].children[1].innerHTML = "<br />"+"Flight Number: "+"<br />"+flightNumber;
       row.appendChild(Card1);
       
       // Create Card 2 which displays Departure date/time and delay.
       Card2 = NewCard()
-      Card2.children[0].innerHTML = "Departure Time: "+departureDate+"<br />"+"Departure Delay: "+departureDelay;
+      Card2.children[0].children[0].innerHTML = "Departure Time: "+"<br />"+departureDate;
+      Card2.children[0].children[1].innerHTML = "Departure Delay: "+"<br />"+departureDelay;
       row.appendChild(Card2);
 
       // Card 3 - Time of arrival, Arrival delay
       Card3 = NewCard()
-      Card3.children[0].innerHTML = "Arrival Time: "+arrivalDate+"<br />"+"Arrival Delay: "+arrivalDelay;
+      Card3.children[0].children[0].innerHTML = "Arrival Time: "+"<br />"+arrivalDate
+      Card3.children[0].children[1].innerHTML = "Arrival Delay: "+"<br />"+arrivalDelay;
       row.appendChild(Card3);
 
       // Append the row to the main element.
@@ -151,7 +166,7 @@ function NewCard() {
 
     // Create each Card as a card and column to ensure correct layout.
     const Card = document.createElement('div');
-    Card.classList.add('card', 'col-4', 'pl-0', 'pr-0');
+    Card.classList.add('card', 'col-4', 'pl-0', 'pr-0', 'text-center', 'mt-4');
     const CardBody = document.createElement('div');
     CardBody.classList.add('card-body');
     CardBody.textcontent = "";
@@ -160,7 +175,7 @@ function NewCard() {
     CardTitle1.classList.add('card-title')
     CardTitle1.textcontent = "";
    // add element p class card-text
-    const CardText1 = document.createElement('p')
+    const CardText1 = document.createElement('h5')
     CardText1.classList.add('card-text')
     CardText1.textContent = "";
     CardBody.appendChild(CardTitle1)
