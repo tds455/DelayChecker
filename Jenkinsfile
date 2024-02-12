@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Check out the source code from GitHub using SSH
-                checkout([$class: 'GitSCM', branches: [[name: '*/dev']], userRemoteConfigs: [[url: 'git@github.com:tds455/DelayChecker.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/6issues#6']], userRemoteConfigs: [[url: 'git@github.com:tds455/DelayChecker.git']]])
             }
         }
 
