@@ -1,5 +1,5 @@
 // Middleware URL is hard-coded for now, but may change to be passed as a docker environment variable.
-let apiUrl = 'https://asia-northeast2-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv2?'
+let apiUrl = 'https://us-central1-delaychecker-412510.cloudfunctions.net/FlightAwareAPIv3?'
 // Initialise regex to be used for input validation
 let regex = /^[A-Za-z]+$/;
 let regexNum = /^[0-9]*$/;
