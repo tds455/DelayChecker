@@ -1,5 +1,4 @@
 import requests
-import flask
 import functions_framework
 import os
 import json
