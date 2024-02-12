@@ -108,6 +108,9 @@ function CreateCards(data) {
       // Info required for each entry taken from response JSON.
       airlineName = item.airline.name
       flightNumber = item.flight.number
+
+      // Not all entries have an "actualTime" - skip if not present
+
       // Format dates to YYYY-MM-DD HH-MM format and remove any unneccesary characters
       arrivalDate = item.arrival.actualTime.slice(0,16).replace("t"," ")
       departureDate = item.departure.actualTime.slice(0,16).replace("t"," ")
