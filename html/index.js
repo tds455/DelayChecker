@@ -65,7 +65,10 @@ async function BuildParams(AirportInput, FlightInput) {
   }
   else {
     // Pass response data to CreateCards function
-    CreateCards(data)
+    await CreateCards(data)
+    // Remove loading spinner and reenable submit button
+    ToggleSpinner()
+    ToggleSubmit()
   }
 }
 
@@ -93,11 +96,13 @@ async function MakeRequest(params)  {
     // If successful response received, convert to JSON and return
     const data = await response.json()
     return data
+
+    
   } 
   
   }
 
-function CreateCards(data) {
+async function CreateCards(data) {
 
     // Link HTML element where cards will be placed
     const element = document.getElementById("ResponseCards");
@@ -107,7 +112,6 @@ function CreateCards(data) {
 
       // Skip item if status is not "landed"
       if (item.status === "landed") {
-        console.log("accepted"+item.status)
 
         // Info required for each entry taken from response JSON.
         airlineName = item.airline.name
@@ -167,13 +171,9 @@ function CreateCards(data) {
   
         // Append the row to the main element.
         element.appendChild(row);
-  
-        // Remove loading spinner and reenable submit button
-        ToggleSpinner()
-        ToggleSubmit()
+
       }
       else {
-        console.log("skipped"+item.status)
         return
       }
 
