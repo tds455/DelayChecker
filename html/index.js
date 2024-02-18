@@ -105,68 +105,78 @@ function CreateCards(data) {
     // Iterate over each object in the response JSON.
     data.forEach(item => {
 
-      // Info required for each entry taken from response JSON.
-      airlineName = item.airline.name
-      flightNumber = item.flight.number
-      arrivalDate = item.arrival.actualTime
-      departureDate = item.departure.actualTime
+      // Skip item if status is not "landed"
+      if (item.status === "landed") {
+        console.log("accepted"+item.status)
 
-      // Not all entries have an "actualTime" - skip if not present
-      if ((!arrivalDate)||(!departureDate)) {
+        // Info required for each entry taken from response JSON.
+        airlineName = item.airline.name
+        flightNumber = item.flight.number
+        arrivalDate = item.arrival.actualTime
+        departureDate = item.departure.actualTime
+  
+        // Not all entries have an "actualTime" - skip if not present
+        if ((!arrivalDate)||(!departureDate)) {
+          return 0
+        }
+  
+        // Format dates to YYYY-MM-DD HH-MM format and remove any unneccesary characters
+        arrivalDate = arrivalDate.slice(0,16).replace("t"," ")
+        departureDate = departureDate.slice(0,16).replace("t"," ")
+  
+        // Check if departure or arrival delays have returned as "undefined" - If so set as 0
+        if (item.departure.delay === undefined) {
+          departureDelay = 0+" Minutes"
+        }
+        else {
+          departureDelay = item.departure.delay+" Minutes"
+        }
+        if (item.arrival.delay === undefined) {
+          arrivalDelay = 0+" Minutes"
+        }
+        else {
+          arrivalDelay = item.arrival.delay+ " Minutes"
+        }
+        
+        // Create Row for each object
+        const row = document.createElement('div');
+        // Add bootstrap class "row"
+        row.classList.add('row');
+  
+        // Call the NewCard function which creates an object with the classes "Card col-sm" and "card-body".
+        // This will create aligned elements that only require innerHTML to be updated.
+        
+        // Create Card 1 which displays Airline info and Flight number
+        // Appends each card to the row element.
+        Card1 = NewCard()
+        Card1.children[0].children[0].innerHTML = "Airline Name: "+"<br />"+airlineName
+        Card1.children[0].children[1].innerHTML = "<br />"+"Flight Number: "+"<br />"+flightNumber;
+        row.appendChild(Card1);
+        
+        // Create Card 2 which displays Departure date/time and delay.
+        Card2 = NewCard()
+        Card2.children[0].children[0].innerHTML = "Departure Time: "+"<br />"+departureDate;
+        Card2.children[0].children[1].innerHTML = "Departure Delay: "+"<br />"+departureDelay;
+        row.appendChild(Card2);
+  
+        // Card 3 - Time of arrival, Arrival delay
+        Card3 = NewCard()
+        Card3.children[0].children[0].innerHTML = "Arrival Time: "+"<br />"+arrivalDate
+        Card3.children[0].children[1].innerHTML = "Arrival Delay: "+"<br />"+arrivalDelay;
+        row.appendChild(Card3);
+  
+        // Append the row to the main element.
+        element.appendChild(row);
+  
+        // Remove loading spinner and reenable submit button
+        ToggleSpinner()
+        ToggleSubmit()
+      }
+      else {
+        console.log("skipped"+item.status)
         return
       }
 
-      // Format dates to YYYY-MM-DD HH-MM format and remove any unneccesary characters
-      arrivalDate = arrivalDate.slice(0,16).replace("t"," ")
-      departureDate = departureDate.slice(0,16).replace("t"," ")
-
-      // Check if departure or arrival delays have returned as "undefined" - If so set as 0
-      if (item.departure.delay === undefined) {
-        departureDelay = 0+" Minutes"
-      }
-      else {
-        departureDelay = item.departure.delay+" Minutes"
-      }
-      if (item.arrival.delay === undefined) {
-        arrivalDelay = 0+" Minutes"
-      }
-      else {
-        arrivalDelay = item.arrival.delay+ " Minutes"
-      }
-      
-      // Create Row for each object
-      const row = document.createElement('div');
-      // Add bootstrap class "row"
-      row.classList.add('row');
-
-      // Call the NewCard function which creates an object with the classes "Card col-sm" and "card-body".
-      // This will create aligned elements that only require innerHTML to be updated.
-      
-      // Create Card 1 which displays Airline info and Flight number
-      // Appends each card to the row element.
-      Card1 = NewCard()
-      Card1.children[0].children[0].innerHTML = "Airline Name: "+"<br />"+airlineName
-      Card1.children[0].children[1].innerHTML = "<br />"+"Flight Number: "+"<br />"+flightNumber;
-      row.appendChild(Card1);
-      
-      // Create Card 2 which displays Departure date/time and delay.
-      Card2 = NewCard()
-      Card2.children[0].children[0].innerHTML = "Departure Time: "+"<br />"+departureDate;
-      Card2.children[0].children[1].innerHTML = "Departure Delay: "+"<br />"+departureDelay;
-      row.appendChild(Card2);
-
-      // Card 3 - Time of arrival, Arrival delay
-      Card3 = NewCard()
-      Card3.children[0].children[0].innerHTML = "Arrival Time: "+"<br />"+arrivalDate
-      Card3.children[0].children[1].innerHTML = "Arrival Delay: "+"<br />"+arrivalDelay;
-      row.appendChild(Card3);
-
-      // Append the row to the main element.
-      element.appendChild(row);
-
-      // Remove loading spinner and reenable submit button
-      ToggleSpinner()
-      ToggleSubmit()
     })
     }
 function NewCard() {
