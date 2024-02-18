@@ -108,12 +108,20 @@ function CreateCards(data) {
       // Info required for each entry taken from response JSON.
       airlineName = item.airline.name
       flightNumber = item.flight.number
+      arrivalDate = item.arrival.actualTime
+      departureDate = item.departure.actualTime
 
       // Not all entries have an "actualTime" - skip if not present
+      if ((!arrivalDate)||(!departureDate)) {
+
+        console.log("no record")
+        return
+      }
 
       // Format dates to YYYY-MM-DD HH-MM format and remove any unneccesary characters
-      arrivalDate = item.arrival.actualTime.slice(0,16).replace("t"," ")
-      departureDate = item.departure.actualTime.slice(0,16).replace("t"," ")
+      arrivalDate = arrivalDate.slice(0,16).replace("t"," ")
+      departureDate = departureDate.slice(0,16).replace("t"," ")
+      console.log("record")
 
       // Check if departure or arrival delays have returned as "undefined" - If so set as 0
       if (item.departure.delay === undefined) {
