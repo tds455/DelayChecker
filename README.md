@@ -11,6 +11,7 @@ DelayChecker is built with vanilla JS, HTML and Bootstrap CSS for styling.  It u
 
 All branch commits are built to a local test server using Jenkins and Docker.
 Merges to the main branch are automatically built and deployed to a GCP cloud run container.
+A Jenkinsfile and Dockerfile were used as part of the CI/CD process.  As any continued development will be entirely contained within branches the Jenkinsfile has now been removed from the main branch.
 
 ##### Demonstration
 
