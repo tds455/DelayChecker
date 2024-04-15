@@ -1,2 +1,4 @@
 .venv
 Jenkinsfile
+.gitattributes
+.DS_Store
