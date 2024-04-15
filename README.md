@@ -17,6 +17,8 @@ A Jenkinsfile and Dockerfile were used as part of the CI/CD process.  As any con
 
 Unfortunately I no longer have access to the aviation-edge API whose functionality DelayChecker was built on, so I have produced a video that demonstrates the basic functionality of DelayChecker.
 
+https://www.youtube.com/watch?v=_W1hA_CPxlI
+
 Please note at one point the project was renamed to FlightAware before realising it was the name of an existing related product.  This name is used in the video and may be referenced at times in code.  The name of the project is DelayChecker.
 
 ## How to deploy
