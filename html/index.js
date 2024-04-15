@@ -96,8 +96,6 @@ async function MakeRequest(params)  {
     // If successful response received, convert to JSON and return
     const data = await response.json()
     return data
-
-    
   } 
   
   }
