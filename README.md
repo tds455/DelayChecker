@@ -1,7 +1,5 @@
 ## DelayChecker
 
-NOTE: search for all INSERT and update before publishing
-
 DelayChecker checks a flight's history and displays how many times it has been delayed in the past 30 days.
 Each listing shows the flight's delay on arrival and departure.
 
